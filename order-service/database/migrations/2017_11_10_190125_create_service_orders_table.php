@@ -21,6 +21,7 @@ class CreateServiceOrdersTable extends Migration
             $table->text('title');
             $table->longText('description');
             $table->enum('status', ServiceOrder::STATUS);
+            $table->softDeletes('deleted_at');
             $table->timestamps();
         });
     }

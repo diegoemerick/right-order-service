@@ -21,21 +21,29 @@ class ServiceOrderRepository implements ServiceOrderRepositoryInterface
 
     public function update($serviceOrder, $id)
     {
-        // TODO: Implement update() method.
+        $order = ServiceOrder::find($id);
+        $order->title = $serviceOrder['title'];
+        $order->description = $serviceOrder['description'];
+        $order->company_id = $serviceOrder['company_id'];
+        $order->save();
+
+        return $order;
     }
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        $order = ServiceOrder::find($id);
+        $order->delete();
+        return $id;
     }
 
     public function index()
     {
-        // TODO: Implement index() method.
+        return ServiceOrder::orderBy('id', 'desc')->get();
     }
 
     public function get($id)
     {
-        // TODO: Implement get() method.
+        return ServiceOrder::find($id);
     }
 }

@@ -34,27 +34,35 @@ class ServiceOrderService implements ServiceOrderServiceInterface
             throw new \Exception('Company not found');
         }
 
-        $this->repository->create($serviceOrder);
+        return $this->repository->create($serviceOrder);
     }
 
     public function update($serviceOrder, $id)
     {
-        // TODO: Implement update() method.
+        $company = $this->companyService->getCompany($serviceOrder['company_id']);
+
+        if (! $company) {
+            if (! $company) {
+                throw new \Exception('Company not found');
+            }
+        }
+
+        return $this->repository->update($serviceOrder, $id);
     }
 
     public function index()
     {
-        // TODO: Implement index() method.
+        return $this->repository->index();
     }
 
     public function get($id)
     {
-        // TODO: Implement get() method.
+        return $this->repository->get($id);
     }
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        return $this->repository->delete($id);
     }
 
 }
