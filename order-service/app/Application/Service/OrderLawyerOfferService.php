@@ -33,11 +33,11 @@ class OrderLawyerOfferService implements OrderLawyerOfferServiceInterface
 
     public function createOrderServiceOffer($offer)
     {
-        if (! $offer['laywer_id']) {
+        if (! $offer['lawyer_id']) {
             throw new \Exception('Lawyer not send');
         }
 
-        $this->getLawyer($offer['laywer_id']);
+        $this->getLawyer($offer['lawyer_id']);
         $this->getOrder($offer['order_id']);
 
         return $this->repository->createOrderToLawyerOffer($offer);

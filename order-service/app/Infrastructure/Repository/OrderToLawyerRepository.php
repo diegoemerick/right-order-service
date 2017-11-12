@@ -21,11 +21,13 @@ class OrderToLawyerRepository implements OrderToLawyerRepositoryInterface
 
     public function listOffers()
     {
-        return OrderServiceToLawyer::orderBy('id', 'desc');
+        return OrderServiceToLawyer::orderBy('id', 'desc')->get();
     }
 
     public function listOffersByOrder($orderId)
     {
-        return OrderServiceToLawyer::where('order_id', $orderId)->get();
+        return OrderServiceToLawyer::where('order_id', (int) $orderId)
+            ->orderBy('id', 'desc')
+            ->get();
     }
 }
