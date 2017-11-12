@@ -81,9 +81,7 @@ class ServiceOrderService implements ServiceOrderServiceInterface
         $lawyer = $this->lawyerService->getLawyer($lawyerId);
 
         if (! $lawyer) {
-            if (! $lawyer) {
-                throw new \Exception('Lawyer not found');
-            }
+            throw new \Exception('Lawyer not found');
         }
 
         return $lawyer;

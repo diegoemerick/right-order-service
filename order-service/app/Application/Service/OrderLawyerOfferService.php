@@ -9,6 +9,7 @@
 namespace App\Application\Service;
 
 
+use App\Application\ServiceOrderService;
 use App\Domain\Model\Lawyer;
 use App\Infrastructure\Repository\OrderToLawyerRepository;
 use App\Infrastructure\Service\LawyerService;
@@ -17,14 +18,17 @@ class OrderLawyerOfferService
 {
     private $repository;
     private $lawyerService;
+    private $orderService;
 
     public function __construct(
         OrderToLawyerRepository $repository,
-        LawyerService $lawyerService
+        LawyerService $lawyerService,
+        ServiceOrderService $orderService
     )
     {
         $this->repository = $repository;
         $this->lawyerService = $lawyerService;
+        $this->orderService = $orderService;
     }
 
     public function orderServiceOffer($offer)
@@ -33,7 +37,9 @@ class OrderLawyerOfferService
             throw new \Exception('Lawyer not send');
         }
 
-        $lawyer = $this->getLawyer($offer['laywer_id']);
+        $this->getLawyer($offer['laywer_id']);
+        $this->getOrder($offer['order_id']);
+
         $this->repository->createOrderToLawyerOffer($offer);
     }
 
@@ -42,11 +48,21 @@ class OrderLawyerOfferService
         $lawyer = $this->lawyerService->getLawyer($lawyerId);
 
         if (! $lawyer) {
-            if (! $lawyer) {
-                throw new \Exception('Lawyer not found');
-            }
+            throw new \Exception('Lawyer not found');
         }
 
         return $lawyer;
     }
+
+    private function getOrder($orderId)
+    {
+        $order = $this->orderService->get($orderId);
+
+        if (! $order) {
+            throw new \Exception('order not found');
+        }
+
+        return $order;
+    }
+
 }
