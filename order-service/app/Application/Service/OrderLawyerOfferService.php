@@ -10,11 +10,11 @@ namespace App\Application\Service;
 
 
 use App\Application\ServiceOrderService;
-use App\Domain\Model\Lawyer;
+use App\Domain\Service\OrderLawyerOfferServiceInterface;
 use App\Infrastructure\Repository\OrderToLawyerRepository;
 use App\Infrastructure\Service\LawyerService;
 
-class OrderLawyerOfferService
+class OrderLawyerOfferService implements OrderLawyerOfferServiceInterface
 {
     private $repository;
     private $lawyerService;
@@ -31,7 +31,7 @@ class OrderLawyerOfferService
         $this->orderService = $orderService;
     }
 
-    public function orderServiceOffer($offer)
+    public function createOrderServiceOffer($offer)
     {
         if (! $offer['laywer_id']) {
             throw new \Exception('Lawyer not send');
@@ -40,7 +40,18 @@ class OrderLawyerOfferService
         $this->getLawyer($offer['laywer_id']);
         $this->getOrder($offer['order_id']);
 
-        $this->repository->createOrderToLawyerOffer($offer);
+        return $this->repository->createOrderToLawyerOffer($offer);
+    }
+
+    public function listOffers()
+    {
+        return $this->repository->listOffers();
+    }
+
+    public function listOfferByOrder($orderId)
+    {
+        $this->getOrder($orderId);
+        return $this->repository->listOffersByOrder($orderId);
     }
 
     private function getLawyer($lawyerId)
