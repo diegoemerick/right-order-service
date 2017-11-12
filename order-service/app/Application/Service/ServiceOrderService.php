@@ -8,6 +8,7 @@
 
 namespace App\Application;
 
+use App\Infrastructure\Repository\OrderToLawyerRepository;
 use App\Infrastructure\Repository\ServiceOrderRepository;
 use App\Infrastructure\Service\CompanyService;
 use App\Domain\Service\ServiceOrderServiceInterface;
@@ -56,14 +57,7 @@ class ServiceOrderService implements ServiceOrderServiceInterface
 
     public function defineLawyerResponseToOrder($id, $lawyerId)
     {
-        $lawyer = $this->lawyerService->getLawyer($lawyerId);
-
-        if (! $lawyer) {
-            if (! $lawyer) {
-                throw new \Exception('Lawyer not found');
-            }
-        }
-
+        $this->getLawyer($lawyerId);
         return $this->repository->defineLaywerToOrder($id, $lawyerId);
     }
 
@@ -80,6 +74,19 @@ class ServiceOrderService implements ServiceOrderServiceInterface
     public function delete($id)
     {
         return $this->repository->delete($id);
+    }
+
+    private function getLawyer($lawyerId)
+    {
+        $lawyer = $this->lawyerService->getLawyer($lawyerId);
+
+        if (! $lawyer) {
+            if (! $lawyer) {
+                throw new \Exception('Lawyer not found');
+            }
+        }
+
+        return $lawyer;
     }
 
 }

@@ -39,4 +39,17 @@ interface ServiceOrderServiceInterface
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * @param $id
+     * @param $lawyerId
+     * @return mixed
+     */
+    public function defineLawyerResponseToOrder($id, $lawyerId);
+
+    /**
+     * @param $offer
+     * @return mixed
+     */
+    public function orderServiceOffer($offer);
 }

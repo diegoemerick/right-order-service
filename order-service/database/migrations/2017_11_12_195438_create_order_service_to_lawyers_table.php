@@ -15,6 +15,9 @@ class CreateOrderServiceToLawyersTable extends Migration
     {
         Schema::create('order_service_to_lawyers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id');
+            $table->integer('lawyer_id');
+            $table->decimal('value', '10', '2');
             $table->timestamps();
         });
     }

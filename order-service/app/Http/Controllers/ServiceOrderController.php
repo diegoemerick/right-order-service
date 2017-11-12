@@ -16,9 +16,9 @@ class ServiceOrderController extends Controller
         $this->serviceOrderService = $serviceOrderService;
     }
 
-    public function defineLawyerResponseToOrder(Request $request)
+    public function orderServiceOffer(Request $request)
     {
-
+        return $this->serviceOrderService->orderServiceOffer($request->get('form'));
     }
 
     public function create(Request $request)
