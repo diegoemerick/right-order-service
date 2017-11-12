@@ -16,6 +16,11 @@ class ServiceOrderController extends Controller
         $this->serviceOrderService = $serviceOrderService;
     }
 
+    public function defineLawyerResponseToOrder(Request $request)
+    {
+
+    }
+
     public function create(Request $request)
     {
         if ($request->get('form')) {
@@ -27,6 +32,13 @@ class ServiceOrderController extends Controller
 
     public function update(Request $request, $id)
     {
+        if($request->get('lawyer_id')) {
+            return $this->serviceOrderService
+                ->defineLawyerResponseToOrder(
+                    $id,
+                    $request->get('lawyer_id')
+                );
+        }
         return $this->serviceOrderService->update($request->get('form'), $id);
     }
 

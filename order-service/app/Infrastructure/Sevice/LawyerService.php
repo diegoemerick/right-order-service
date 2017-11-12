@@ -10,14 +10,15 @@ namespace App\Infrastructure\Service;
 
 use App\Domain\Model\Company;
 use App\Domain\Service\CompanyServiceInterface;
+use App\Domain\Service\LawyerServiceInterface;
 use GuzzleHttp\Client;
 
-class CompanyService implements CompanyServiceInterface
+class LawyerService implements LawyerServiceInterface
 {
-    public function getCompany($id)
+    public function getLawyer($id)
     {
         $client = new Client();
-        $res = $client->get(Company::URI . '/company/' . $id)
+        $res = $client->get(Company::URI . '/lawyer/' . $id)
             ->getBody()->getContents();
 
         return json_decode($res);

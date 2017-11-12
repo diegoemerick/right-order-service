@@ -39,4 +39,11 @@ interface ServiceOrderRepositoryInterface
      * @return mixed
      */
     public function get($id);
+
+    /**
+     * @param $id
+     * @param $lawyerId
+     * @return mixed
+     */
+    public function defineLaywerToOrder($id, $lawyerId);
 }

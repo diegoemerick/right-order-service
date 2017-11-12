@@ -8,7 +8,6 @@
 
 namespace App\Infrastructure\Repository;
 
-
 use App\Domain\Model\ServiceOrder;
 use App\Domain\Repository\ServiceOrderRepositoryInterface;
 
@@ -45,5 +44,15 @@ class ServiceOrderRepository implements ServiceOrderRepositoryInterface
     public function get($id)
     {
         return ServiceOrder::find($id);
+    }
+
+    public function defineLaywerToOrder($id, $lawyerId)
+    {
+        $order = ServiceOrder::find($id);
+        $order->lawyer_id = $lawyerId;
+        $order->status = 2;
+        $order->save();
+
+        return $order;
     }
 }

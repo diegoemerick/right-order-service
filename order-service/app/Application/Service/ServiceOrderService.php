@@ -11,19 +11,23 @@ namespace App\Application;
 use App\Infrastructure\Repository\ServiceOrderRepository;
 use App\Infrastructure\Service\CompanyService;
 use App\Domain\Service\ServiceOrderServiceInterface;
+use App\Infrastructure\Service\LawyerService;
 
 class ServiceOrderService implements ServiceOrderServiceInterface
 {
     private $repository;
     private $companyService;
+    private $lawyerService;
 
     public function __construct(
         CompanyService $companyService,
-        ServiceOrderRepository $repository
+        ServiceOrderRepository $repository,
+        LawyerService $lawyerService
     )
     {
         $this->companyService = $companyService;
         $this->repository = $repository;
+        $this->lawyerService = $lawyerService;
     }
 
     public function create($serviceOrder)
@@ -63,6 +67,19 @@ class ServiceOrderService implements ServiceOrderServiceInterface
     public function delete($id)
     {
         return $this->repository->delete($id);
+    }
+
+    public function defineLawyerResponseToOrder($id, $lawyerId)
+    {
+        $lawyer = $this->lawyerService->getLawyer($lawyerId);
+
+        if (! $lawyer) {
+            if (! $lawyer) {
+                throw new \Exception('Lawyer not found');
+            }
+        }
+
+        return $this->repository->defineLaywerToOrder($id, $lawyerId);
     }
 
 }

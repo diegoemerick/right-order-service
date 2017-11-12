@@ -2,9 +2,9 @@
 
 namespace App\Domain\Model;
 
-class Company
+class Lawyer
 {
     const URL = "http://localhost";
-    const PORT = ":3003/api/v1";
+    const PORT = ":3004/api/v1";
     const URI = self::URL . self::PORT;
 }
