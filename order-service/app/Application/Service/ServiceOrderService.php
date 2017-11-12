@@ -8,7 +8,6 @@
 
 namespace App\Application;
 
-use App\Infrastructure\Repository\OrderToLawyerRepository;
 use App\Infrastructure\Repository\ServiceOrderRepository;
 use App\Infrastructure\Service\CompanyService;
 use App\Domain\Service\ServiceOrderServiceInterface;

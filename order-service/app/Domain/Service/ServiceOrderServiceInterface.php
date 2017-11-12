@@ -46,10 +46,4 @@ interface ServiceOrderServiceInterface
      * @return mixed
      */
     public function defineLawyerResponseToOrder($id, $lawyerId);
-
-    /**
-     * @param $offer
-     * @return mixed
-     */
-    public function orderServiceOffer($offer);
 }
