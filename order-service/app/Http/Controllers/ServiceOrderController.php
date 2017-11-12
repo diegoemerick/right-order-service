@@ -32,13 +32,6 @@ class ServiceOrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        if($request->get('lawyer_id')) {
-            return $this->serviceOrderService
-                ->defineLawyerResponseToOrder(
-                    $id,
-                    $request->get('lawyer_id')
-                );
-        }
         return $this->serviceOrderService->update($request->get('form'), $id);
     }
 
@@ -47,8 +40,15 @@ class ServiceOrderController extends Controller
         return $this->serviceOrderService->delete($id);
     }
 
-    public function get($id)
+    public function get(Request $request, $id)
     {
+        if($request->get('lawyer_id')) {
+            return $this->serviceOrderService
+                ->defineLawyerResponseToOrder(
+                    $id,
+                    $request->get('lawyer_id')
+                );
+        }
         return $this->serviceOrderService->get($id);
     }
 

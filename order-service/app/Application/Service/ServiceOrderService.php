@@ -54,6 +54,19 @@ class ServiceOrderService implements ServiceOrderServiceInterface
         return $this->repository->update($serviceOrder, $id);
     }
 
+    public function defineLawyerResponseToOrder($id, $lawyerId)
+    {
+        $lawyer = $this->lawyerService->getLawyer($lawyerId);
+
+        if (! $lawyer) {
+            if (! $lawyer) {
+                throw new \Exception('Lawyer not found');
+            }
+        }
+
+        return $this->repository->defineLaywerToOrder($id, $lawyerId);
+    }
+
     public function index()
     {
         return $this->repository->index();
@@ -67,19 +80,6 @@ class ServiceOrderService implements ServiceOrderServiceInterface
     public function delete($id)
     {
         return $this->repository->delete($id);
-    }
-
-    public function defineLawyerResponseToOrder($id, $lawyerId)
-    {
-        $lawyer = $this->lawyerService->getLawyer($lawyerId);
-
-        if (! $lawyer) {
-            if (! $lawyer) {
-                throw new \Exception('Lawyer not found');
-            }
-        }
-
-        return $this->repository->defineLaywerToOrder($id, $lawyerId);
     }
 
 }
